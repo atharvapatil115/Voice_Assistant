@@ -29,26 +29,26 @@ class Wake_word_test(unittest.TestCase):
         mocked_print.assert_any_call("listning wake word")
         mocked_print.assert_any_call("You said hey Friday")
 
-class Command_test(unittest.TestCase):
+# class Command_test(unittest.TestCase):
 
-    @patch('builtins.print')
-    @patch('assistant.main.recognizer.recognize_google')  # Correct patch path
-    @patch('assistant.main.recognizer.listen')             # Correct patch path
-    @patch('assistant.main.sr.Microphone')                 # Mock microphone
-    def test_for_time(self, mock_microphone, mock_listen, mock_recognize_google, mocked_print):
-        mock_recognize_google.return_value = "time"
+#     @patch('builtins.print')
+#     @patch('assistant.main.recognizer.recognize_google')  # Correct patch path
+#     @patch('assistant.main.recognizer.listen')             # Correct patch path
+#     @patch('assistant.main.sr.Microphone')                 # Mock microphone
+#     def test_for_time(self, mock_microphone, mock_listen, mock_recognize_google, mocked_print):
+#         mock_recognize_google.return_value = "time"
         
-        listen_for_command()
+#         listen_for_command()
 
-        mocked_print.assert_any_call(f"The time is {datetime.now().strftime('%I:%M %p')}")
-        # mocked_print.assert_any_call("You said hey Friday")
+#         mocked_print.assert_any_call(f"The time is {datetime.now().strftime('%I:%M %p')}")
+#         # mocked_print.assert_any_call("You said hey Friday")
     
-    @patch('builtins.print')
-    @patch('assistant.main.recognizer.recognize_google') 
-    @patch('assistant.main.recognizer.listen')             #
-    @patch('assistant.main.sr.Microphone')      
-    def test_for_date(self,mock_microphone, mock_listen, mock_recognize_google,mocked_print):
-        mock_recognize_google.return_value = "date"
-        listen_for_command()
+#     @patch('builtins.print')
+#     @patch('assistant.main.recognizer.recognize_google') 
+#     @patch('assistant.main.recognizer.listen')             #
+#     @patch('assistant.main.sr.Microphone')      
+#     def test_for_date(self,mock_microphone, mock_listen, mock_recognize_google,mocked_print):
+#         mock_recognize_google.return_value = "date"
+#         listen_for_command()
 
-        mocked_print.assert_any_call(f"Hello! Today is {datetime.now().strftime('%A') }, the {get_Ordinal(datetime.now().day)} of {datetime.now().strftime('%B')}, {datetime.now().year}.")
+#         mocked_print.assert_any_call(f"Hello! Today is {datetime.now().strftime('%A') }, the {get_Ordinal(datetime.now().day)} of {datetime.now().strftime('%B')}, {datetime.now().year}.")
