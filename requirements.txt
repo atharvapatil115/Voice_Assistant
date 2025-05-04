@@ -5,3 +5,4 @@ pyttsx3
 pyaudio
 speechrecognition
 pyjokes
+scikit-learn
