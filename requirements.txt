@@ -1,6 +1,8 @@
 numpy
 pandas
 matplotlib
-speech_recognition
 pyttsx3
 pyaudio
+speechrecognition
+datetime
+unittest
