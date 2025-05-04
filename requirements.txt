@@ -4,5 +4,3 @@ matplotlib
 pyttsx3
 pyaudio
 speechrecognition
-datetime
-unittest
