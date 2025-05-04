@@ -51,4 +51,4 @@ class Command_test(unittest.TestCase):
         mock_recognize_google.return_value = "date"
         listen_for_command()
 
-        mocked_print.assert_any_call(f"Hello! Today is {datetime.now().strftime("%A") }, the {get_Ordinal(datetime.now().day)} of {datetime.now().strftime("%B")}, {datetime.now().year}.")
+        mocked_print.assert_any_call(f"Hello! Today is {datetime.now().strftime('%A') }, the {get_Ordinal(datetime.now().day)} of {datetime.now().strftime('%B')}, {datetime.now().year}.")
