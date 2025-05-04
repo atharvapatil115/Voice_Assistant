@@ -3,7 +3,10 @@ import pyttsx3 as p
 import datetime 
 recognizer = sr.Recognizer()
 import time
-
+import os
+import webbrowser
+import pyjokes
+from preprocessing.Vectorization import Calculate_best_match
 global start
 start = True
 def get_Ordinal(n):
@@ -41,7 +44,7 @@ def listen_wake_word():
      try:
           text = recognizer.recognize_google(audio)
           print(f"You said {text}")
-          if "hey Friday" in text:
+          if "Friday" in text:
                speak("hey!, I'm listning") 
                listen_for_command()
           else:
@@ -59,47 +62,16 @@ def listen_for_command():
                     command = recognizer.recognize_google(audio).lower()
                     print(f"Command received: {command}")
                     # You can add your command handling here
-                    if "time" in command:
-                        
-                        speak(f"The time is {datetime.datetime.now().strftime('%I:%M %p')}")
-                    
-                    elif "date" in command:
-                         today = datetime.datetime.now()
-                         day = get_Ordinal(today.day)
-                         month = today.strftime("%B")
-                         year = today.year
-                         day_of_week = today.strftime("%A")  # e.g., Wednesday
-                         sentence = f"Hello! Today is {day_of_week}, the {day} of {month}, {year}."
+                    action_name,score = Calculate_best_match(command)
+                    if action_name:
+                          action_function = globals().get(action_name)
+                          if action_function:
+                                action_function()
+                          else:
+                                speak("Sorry, I know what you mean, but I don't know how to do it yet.")
 
-                         speak(sentence)
-                    elif "code" in command and  "addition" in command and "python" in command:
-                          try:
-                              with open ("addition.py","a") as f:
-                                   program = "a=10 \nb=20 \nprint(f'Addition of two number is {a+b}')"
-                                   f.write(program)
-                                   f.close()
-                              print(f"Program Created \n{program}")
-                          except Exception as e:
-                                print(e)
-                                speak(e)
-                    elif "code" in command and  "addition" in command  and "c" or "c language" in command:
-                          try:
-                              with open ("addition.c","a") as f:
-                                   program = "#include<stdio.h> \n\nint main(){ \nint a = 10; \nint b=20; \nprintf('The addition of two numbers is %d',(a+b)); \nreturn 0; \n}"
-                                   f.write(program)
-                                   f.close()
-                              print(f"Program Created \n{program}")
-                              speak(f"Program for addition created in file addition.c")
-
-                          except Exception as e:
-                                print(e)
-                                speak(e)
-                    elif "sleep" in command:
-                          speak("shutting down!!")
-                          start = False
                     else:
-                        speak("Sorry, I didn't understand.")
-
+                        speak("Sorry, I didn't understand that.")
 
         except sr.UnknownValueError:
                     speak("Sorry, I could not understand.")
@@ -112,6 +84,54 @@ def listen_for_command():
 # time.sleep(2)
 # engine.say(f"is there anything else i can help you with  ??")
 # engine.runAndWait()
+
+def launch_browser():
+    speak("Opening browser")
+    webbrowser.open("https://www.google.com")
+
+def tell_time():
+    current_time = datetime.datetime.now().strftime('%I:%M %p')
+    speak(f"The time is {current_time}")
+
+def say_joke():
+     speak("DO you really wanna hear a joke?")
+     with sr.Microphone() as source:
+          audio = recognizer.listen(source)
+          answer = recognizer.recognize_google(audio).lower()
+          print(f"Command received: {answer}")
+     if "yes" in answer :
+           joke = pyjokes.get_joke()
+           speak(joke)
+
+     else:
+          speak("opration cancelled!")
+   
+def shutdown_system():
+    
+     speak("DO you really want to shutdown system??")
+     with sr.Microphone() as source:
+          audio = recognizer.listen(source)
+          answer = recognizer.recognize_google(audio).lower()
+          print(f"Command received: {answer}")
+     if "yes" in answer :
+          speak("Shutting down the system")
+          os.system("shutdown /s /t 1")
+     else:
+          speak("opration cancelled!")
+
+# def play_music():
+#     speak("Playing music")
+#     os.startfile("C:\\Path\\To\\Your\\Music.mp3")  
+
+def tell_date():
+    today = datetime.datetime.now()
+    day = get_Ordinal(today.day)
+    month = today.strftime("%B")
+    year = today.year
+    day_of_week = today.strftime("%A")
+    sentence = f"Today is {day_of_week}, the {day} of {month}, {year}."
+    speak(sentence)
+
 if __name__ == "__main__":
      speak("Hello there! System started")
      speak("Say the wake word")
