@@ -4,3 +4,4 @@ matplotlib
 pyttsx3
 pyaudio
 speechrecognition
+pyjokes
