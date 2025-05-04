@@ -1,6 +1,6 @@
 import speech_recognition  as sr
 import pyttsx3 as p
-from datetime import datetime
+import datetime 
 recognizer = sr.Recognizer()
 import time
 
@@ -35,16 +35,17 @@ def speak(text):
 #     print(f"You said: \t {text}")
 
 def listen_wake_word():
-     
      with sr.Microphone() as source:
-          print("listning wait word")
+          print("listning wake word")
           audio = recognizer.listen(source)
      try:
           text = recognizer.recognize_google(audio)
           print(f"You said {text}")
           if "hey Friday" in text:
-               speak("hey!, I am listening") 
+               speak("hey!, I'm listning") 
                listen_for_command()
+          else:
+                speak("sorry wrong wake word")
      except sr.UnknownValueError:
           pass
      except sr.RequestError:
@@ -60,10 +61,10 @@ def listen_for_command():
                     # You can add your command handling here
                     if "time" in command:
                         
-                        speak(f"The time is {datetime.now().strftime('%I:%M %p')}")
+                        speak(f"The time is {datetime.datetime.now().strftime('%I:%M %p')}")
                     
                     elif "date" in command:
-                         today = datetime.now()
+                         today = datetime.datetime.now()
                          day = get_Ordinal(today.day)
                          month = today.strftime("%B")
                          year = today.year
@@ -93,7 +94,7 @@ def listen_for_command():
                           except Exception as e:
                                 print(e)
                                 speak(e)
-                    elif "shutdown" in command:
+                    elif "sleep" in command:
                           speak("shutting down!!")
                           start = False
                     else:
@@ -106,10 +107,13 @@ def listen_for_command():
                     speak("Speech service error!")
 
 
-# engine.say(f"Hello today's date is {datetime.now().strftime('%Y-%m-%d')}")
+# engine.say(f"Hello today's date is {datetime.datetime.now().strftime('%Y-%m-%d')}")
 # engine.runAndWait()
 # time.sleep(2)
 # engine.say(f"is there anything else i can help you with  ??")
 # engine.runAndWait()
-while start:
-    listen_wake_word()
+if __name__ == "__main__":
+     speak("Hello there! System started")
+     speak("Say the wake word")
+     while start:
+            listen_wake_word()
