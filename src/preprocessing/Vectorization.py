@@ -8,7 +8,8 @@ COMMANDS = {
     "tell me a joke": "say_joke",
     "shutdown the system": "shutdown_system",
     "play some music": "play_music",
-    "Whats todays date" : "tell_date"
+    "Whats todays date" : "tell_date",
+    "Can you Send a Whatsapp message" : "sendMessage"
 }
 processed_commands = [preprocess(cmd) for cmd in COMMANDS.keys()]
 
@@ -37,5 +38,5 @@ def Calculate_best_match(user_input):
     
     return action, best_score
 
-action,score = Calculate_best_match("i want to listen   to  a nice music i wonder i can find??")
+action,score = Calculate_best_match("can you send whatsapp message for me ?")
 print(f"Action : {action} \n score: {score}")
