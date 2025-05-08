@@ -11,7 +11,7 @@ sys.modules['mouseinfo'] = mock.MagicMock()
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from assistant.main import get_Ordinal, listen_wake_word,listen_for_command
+from assistant.main import get_ordinal, listen_wake_word,listen_for_command
 
 class Ordinal_test(unittest.TestCase):
     def test_for_ordinal1(self):
