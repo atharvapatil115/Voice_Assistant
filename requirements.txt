@@ -6,3 +6,4 @@ pyaudio
 speechrecognition
 pyjokes
 scikit-learn
+pywhatkit
