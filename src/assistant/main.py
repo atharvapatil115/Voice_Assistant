@@ -9,7 +9,7 @@ from difflib import get_close_matches
 from preprocessing.Vectorization import Calculate_best_match
 from Utils.Data_Logger import log_info, log_error, log_warning
 import sys
-from message import send_Message
+from .message import send_Message
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 # Initialize
