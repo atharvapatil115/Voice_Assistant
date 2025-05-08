@@ -15,10 +15,10 @@ from assistant.main import get_ordinal, listen_wake_word,listen_for_command
 
 class Ordinal_test(unittest.TestCase):
     def test_for_ordinal1(self):
-        self.assertEqual(get_Ordinal(1), "1st")
-        self.assertEqual(get_Ordinal(2), "2nd")
-        self.assertEqual(get_Ordinal(3), "3rd")
-        self.assertEqual(get_Ordinal(4), "4th")
+        self.assertEqual(get_ordinal(1), "1st")
+        self.assertEqual(get_ordinal(2), "2nd")
+        self.assertEqual(get_ordinal(3), "3rd")
+        self.assertEqual(get_ordinal(4), "4th")
 
 class Wake_word_test(unittest.TestCase):
 
@@ -56,4 +56,4 @@ class Wake_word_test(unittest.TestCase):
 #         mock_recognize_google.return_value = "date"
 #         listen_for_command()
 
-#         mocked_print.assert_any_call(f"Hello! Today is {datetime.now().strftime('%A') }, the {get_Ordinal(datetime.now().day)} of {datetime.now().strftime('%B')}, {datetime.now().year}.")
+#         mocked_print.assert_any_call(f"Hello! Today is {datetime.now().strftime('%A') }, the {get_ordinal(datetime.now().day)} of {datetime.now().strftime('%B')}, {datetime.now().year}.")
