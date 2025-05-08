@@ -9,7 +9,7 @@ from difflib import get_close_matches
 from preprocessing.Vectorization import Calculate_best_match
 from Utils.Data_Logger import log_info, log_error, log_warning
 import sys
-
+from message import send_Message
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 # Initialize
@@ -18,7 +18,8 @@ start = True
 contacts = {
     "samiksha": "+917397856907",
     "atharva": "+919322392155",
-    "atharv": "+919322392155"
+    "atharv": "+919322392155",
+    "sahil" : "+919175750198"
 }
 
 # Text-to-speech engine
@@ -137,7 +138,8 @@ def sendMessage():
                     audio = recognizer.listen(source)
                 ans = recognizer.recognize_google(audio).lower()
                 if "send" in ans:
-                    pywhatkit.sendwhatmsg_instantly(contacts[contact_name], message)
+                    # pywhatkit.sendwhatmsg_instantly(contacts[contact_name], message)
+                    send_Message(message,contacts[contact_name])
                     speak("Message sent successfully.")
                     return
                 else:
@@ -229,6 +231,7 @@ def listen_wake_word():
 
 # Main
 if __name__ == "__main__":
+    # print(contacts["atharva"])
     speak("Hello there! System started.")
     log_info("System has started")
     speak("Say the wake word.")

@@ -1,8 +1,13 @@
 import unittest 
-import sys
 from datetime import datetime
 import os
 from unittest.mock import patch
+import sys
+from unittest import mock
+
+sys.modules['pywhatkit'] = mock.MagicMock()
+sys.modules['pyautogui'] = mock.MagicMock()
+sys.modules['mouseinfo'] = mock.MagicMock()
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
